@@ -37,13 +37,13 @@ Block Explorer: https://bscscan.com
 **Method: BSC Discord (Recommended - Working)**
 1. Join BSC Discord: https://discord.gg/bnbchain
 2. Go to #testnet-faucet channel
-3. Type: `!faucet YOUR_WALLET_ADDRESS`
+3. Type: `/faucet YOUR_WALLET_ADDRESS`
 4. Complete the captcha
-5. Wait for confirmation (~2-3 minutes)
+5. Wait for confirmation (~30 seconds)
 
 #### Step 3: Deploy on Remix
 1. Open Remix IDE
-2. Load your `Only42.sol` contract
+2. Load your `Only42.sol` contract (flattened version)
 3. Compile with Solidity 0.8.30
 4. **Deploy & Run Transactions** tab
 5. Environment: **"Injected Provider - MetaMask"**
@@ -101,6 +101,15 @@ Once verified, your token will appear with:
 Your token will have a dedicated page:
 `https://testnet.bscscan.com/token/YOUR_CONTRACT_ADDRESS`
 
+### Phase 4: Test transactions
+
+#### On Metamask
+Create a new account based on ETH. Import the BNB network.
+And then import the Token via the contract Token adress.
+Make a transaction and well done !
+
+![Successful Deployment Transaction](images/transaction.png)
+*Screenshot showing successful deployment transaction on BSC Testnet*
 
 ## 🔗 Useful Links
 

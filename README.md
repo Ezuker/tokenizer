@@ -1,125 +1,113 @@
 # Only42 Token Project 🪙
 
 ## Overview
-This project implements an ERC-20 token called "Only42" (O42) as part of the 42 School Web3 curriculum. The token is developed using Solidity and deployed using Remix IDE with enhanced security features.
+This project implements an ERC-20 token called "Only42" (O42) as part of the 42 School Web3 curriculum. The token is developed using Solidity and deployed using Remix IDE with enhanced security features including pause/unpause controls, burn functionality, and owner-based access control.
 
 ## 🌐 Deployed Contracts
 
-### Current Status: Testing Phase
+### Current Status: Successfully Deployed ✅
 - **Development**: ✅ Completed and tested on Remix VM
-- **Testnet**: ⏳ Ready for BSC Testnet deployment  
-- **Mainnet**: ⏸️ Awaiting testnet validation
+- **Testnet**: ✅ Successfully deployed on BSC Testnet
 
 ### Deployment Information
-*Will be updated after public blockchain deployment*
 
-#### BSC Testnet (Coming Soon)
-- **Contract Address**: `TO_BE_UPDATED`
+#### BSC Testnet (LIVE) 🚀
+- **Contract Address**: `0x6b82271E52e06D89b19c769CeE7C274556E19Bf1`
 - **Network**: BSC Testnet (Chain ID: 97)
-- **Explorer**: [Will be updated after deployment]
-- **Status**: Ready for deployment
+- **Explorer**: [View on BSCScan](https://testnet.bscscan.com/address/0x6b82271E52e06D89b19c769CeE7C274556E19Bf1)
+- **Status**: ✅ Deployed & Active
+- **Deployment Date**: June 2025
 
 #### Token Details
 - **Name**: Only42
 - **Symbol**: O42
 - **Decimals**: 18
-- **Total Supply**: 42 O42
+- **Total Supply**: 42 O42 (Fixed Supply)
 - **Features**: ERC-20 + Ownable + Pausable + Burnable
+- **Contract Type**: Fixed supply token with owner controls
 
 ## Project Choices and Rationale
 
-### Blockchain Platform: Ethereum/BSC
-- **Choice**: Ethereum (ERC-20 standard) or Binance Smart Chain (BEP-20)
+### Blockchain Platform: Binance Smart Chain (BSC)
+- **Choice**: BSC Testnet for development, targeting BSC ecosystem
 - **Rationale**: 
-  - Wide adoption and community support
-  - Robust tooling ecosystem
-  - Compatible with most wallets and exchanges
-  - Lower gas fees on BSC for testing
+  - Lower gas fees compared to Ethereum
+  - Fast transaction confirmation times
+  - Wide adoption and growing ecosystem
+  - Compatible with Ethereum tooling (EVM-compatible)
+  - Excellent for learning and testing Web3 concepts
+  - The most important: No need to have BNB on mainnet
 
 ### Development Environment: Remix IDE
 - **Choice**: Remix IDE (https://remix.ethereum.org/)
 - **Rationale**:
   - Browser-based, no local setup required
   - Built-in compiler and debugger
-  - Integrated deployment tools
+  - Integrated deployment tools with MetaMask
   - Excellent for learning and prototyping
-  - Direct integration with MetaMask
+  - Direct integration with public blockchains
+  - A lot of videos and stuff were on Remix
 
-### Token Standard: ERC-20
-- **Choice**: ERC-20 compliant token
+### Token Standard: ERC-20 with Security Extensions
+- **Choice**: ERC-20 + OpenZeppelin security modules
 - **Rationale**:
   - Industry standard for fungible tokens
   - Maximum compatibility with wallets and exchanges
   - Well-documented and battle-tested
-  - Rich ecosystem of tools and libraries
+  - OpenZeppelin provides audited security implementations
+  - A lot of videos was on ERC-20 too
 
-### Security Framework: OpenZeppelin
-- **Choice**: OpenZeppelin Contracts library
+### Security Framework: OpenZeppelin Contracts
+- **Choice**: OpenZeppelin Contracts v4.9.0
 - **Rationale**:
   - Audited and secure contract implementations
-  - Industry best practices
-  - Modular and extensible design
+  - Industry best practices for access control
+  - Modular design (ERC20 + Ownable + Pausable)
   - Reduces development time and security risks
 
-## Token Specifications
+## Smart Contract Features
 
-- **Name**: Token42 (subject to change)
-- **Symbol**: T42 (subject to change)
-- **Decimals**: 18
-- **Total Supply**: 1,000,000 tokens
-- **Network**: BSC Testnet (for development), BSC Mainnet (for final deployment)
+### Core Functionality
+- **ERC-20 Compliance**: Full compatibility with ERC-20 standard
+- **Fixed Supply**: 42 tokens minted at deployment (no additional minting)
+- **Burnable**: Token holders can permanently destroy their tokens
+- **Pausable**: Owner can halt all transfers in emergency situations
+- **Ownable**: Administrative functions restricted to contract owner
+
+### Security Features
+- **Access Control**: Only owner can pause/unpause the contract
+- **Balance Validation**: Burn function includes balance checks
+- **Event Logging**: All major operations emit events for transparency
+- **Overflow Protection**: Using Solidity 0.8.30 built-in overflow checks
+
+### Custom Events
+```solidity
+event TokensMinted(address indexed to, uint256 amount);
+event TokensBurned(address indexed from, uint256 amount);
+event ContractPaused(address indexed by);
+event ContractUnpaused(address indexed by);
+```
 
 ## Project Structure
 
 ```
 tokenizer/
-├── README.md                 # This file
-├── subject.md               # Project requirements
-├── code/                    # Smart contract source code
-│   ├── Token42.sol         # Main ERC-20 token contract
-│   └── Multisig.sol        # Bonus: Multisig wallet contract
-├── deployment/              # Deployment scripts and configs
-│   ├── deploy.js           # Deployment script
-│   ├── config.json         # Network configurations
-│   └── addresses.json      # Deployed contract addresses
-└── documentation/           # Project documentation
-    ├── whitepaper.md       # Token whitepaper
-    ├── api.md              # API documentation
-    └── security.md         # Security considerations
+├── README.md
+├── code/
+│   ├── Only42.sol              # Main ERC-20 token contract with multisig
+│   ├── Only42_flattened.sol    # Flattened version for BSCScan
+│   └── Only42MultisigTest.sol  # Testing contract for multisig functionality
+├── deployment/
+│   ├── images/
+│   │   └── transaction.png     # Deployment screenshot
+│   ├── private-deployment.md   # Deployment on Remix VM
+│   ├── public-deployment.md    # Deployment on BSC testnet
+│   └── multisig-testing.md     # Multisig testing guide for Remix
+└── documentation/
+    ├── vocabulary.md           # Web3 and blockchain vocabulary
+    ├── chain-id-sources.md     # Official chain ID references
+    └── multisig-guide.md       # Complete multisig implementation guide
 ```
-
-## Development Roadmap
-
-### Phase 1: Setup ✅
-- [x] Create project structure
-- [ ] Define token specifications
-- [ ] Set up Remix workspace
-
-### Phase 2: Development
-- [ ] Implement ERC-20 token contract
-- [ ] Add security features
-- [ ] Implement ownership controls
-- [ ] Add minting/burning capabilities
-
-### Phase 3: Testing
-- [ ] Unit testing in Remix
-- [ ] Testnet deployment
-- [ ] Integration testing
-- [ ] Security review
-
-### Phase 4: Documentation
-- [ ] Complete technical documentation
-- [ ] Write whitepaper
-- [ ] Create usage guide
-
-### Phase 5: Deployment
-- [ ] Mainnet deployment
-- [ ] Contract verification
-- [ ] Block explorer listing
-
-### Phase 6: Bonus (Optional)
-- [ ] Implement multisig wallet
-- [ ] Advanced governance features
 
 ## Getting Started
 
@@ -128,8 +116,8 @@ tokenizer/
 3. Import OpenZeppelin contracts
 4. Copy contracts from `code/` folder
 5. Compile and test in JavaScript VM
-6. Deploy to testnet for testing
-7. Deploy to mainnet when ready
+6. Follow private-deployment to test the token
+7. Follow public-deployment for publishing it on public blockchain
 
 ## Security Considerations
 
@@ -140,10 +128,8 @@ tokenizer/
 
 ## Contract Addresses
 
-*Will be updated after deployment*
 
-- **Testnet**: TBD
-- **Mainnet**: TBD
+- **Testnet**: 0x87b8eBac27a50014d07075769Df0df040781Cf7e
 - **Network**: TBD
 
 ## Links and Resources
