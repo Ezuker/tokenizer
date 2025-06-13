@@ -1,7 +1,30 @@
-# Token42 Project
+# Only42 Token Project 🪙
 
 ## Overview
-This project implements an ERC-20 token called "Token42" as part of the 42 School Web3 curriculum. The token is developed using Solidity and deployed using Remix IDE.
+This project implements an ERC-20 token called "Only42" (O42) as part of the 42 School Web3 curriculum. The token is developed using Solidity and deployed using Remix IDE with enhanced security features.
+
+## 🌐 Deployed Contracts
+
+### Current Status: Testing Phase
+- **Development**: ✅ Completed and tested on Remix VM
+- **Testnet**: ⏳ Ready for BSC Testnet deployment  
+- **Mainnet**: ⏸️ Awaiting testnet validation
+
+### Deployment Information
+*Will be updated after public blockchain deployment*
+
+#### BSC Testnet (Coming Soon)
+- **Contract Address**: `TO_BE_UPDATED`
+- **Network**: BSC Testnet (Chain ID: 97)
+- **Explorer**: [Will be updated after deployment]
+- **Status**: Ready for deployment
+
+#### Token Details
+- **Name**: Only42
+- **Symbol**: O42
+- **Decimals**: 18
+- **Total Supply**: 42 O42
+- **Features**: ERC-20 + Ownable + Pausable + Burnable
 
 ## Project Choices and Rationale
 
@@ -129,7 +152,8 @@ tokenizer/
 - [OpenZeppelin Contracts](https://openzeppelin.com/contracts/)
 - [ERC-20 Standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/)
 - [BSC Testnet Faucet](https://testnet.binance.org/faucet-smart)
+- [ChainList](https://chainlist.org/) - Official registry of blockchain networks and Chain IDs
+- [ABI-Hashex](https://abi.hashex.org) - ABI hasher for validation contract (constructor params)
+- [Docs-Faucet](https://docs.bnbchain.org/bnb-smart-chain/developers/faucet/) - To get tBNB (Use discord method)
 
 ---
-
-*Last updated: June 12, 2025*
