@@ -94,19 +94,15 @@ event ContractUnpaused(address indexed by);
 tokenizer/
 ├── README.md
 ├── code/
-│   ├── Only42.sol              # Main ERC-20 token contract with multisig
-│   ├── Only42_flattened.sol    # Flattened version for BSCScan
-│   └── Only42MultisigTest.sol  # Testing contract for multisig functionality
+│   ├── Only42.sol            # Main ERC-20 token contract
+│   └── Only42_flattened.sol  # Flattened ERC-20 token contract
 ├── deployment/
 │   ├── images/
-│   │   └── transaction.png     # Deployment screenshot
-│   ├── private-deployment.md   # Deployment on Remix VM
-│   ├── public-deployment.md    # Deployment on BSC testnet
-│   └── multisig-testing.md     # Multisig testing guide for Remix
+│   ├── private-deployment.md # Deployment on Remix only
+│   └── public-deployment.md  # Deployment on testnet of BNB
 └── documentation/
-    ├── vocabulary.md           # Web3 and blockchain vocabulary
-    ├── chain-id-sources.md     # Official chain ID references
-    └── multisig-guide.md       # Complete multisig implementation guide
+    ├── vocabulary.md         # Vocabulary of Web3 tokens
+    └── chain-id-sources.md  
 ```
 
 ## Getting Started
