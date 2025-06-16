@@ -43,6 +43,10 @@
 - **What**: Requires multiple people to approve important actions
 - **Example**: 3 out of 5 people must agree to mint new tokens
 - **Real-world analogy**: Like needing 2 keys to open a safe deposit box
+- **Implementation**: 
+  - Multiple owners can propose actions
+  - Requires a minimum number of approvals
+  - Actions only execute when threshold is met
 
 #### **Access Control**
 - **What**: Rules about who can do what
@@ -67,4 +71,25 @@
 - **Deployment**: Publishing your smart contract to the blockchain (like publishing an app to the app store)
 - **Compilation**: Converting your human-readable code into blockchain-readable code
 - **Solidity**: Programming language used to write smart contracts on Ethereum
+
+### ⛏️ **Mining & Rewards**
+- **What**: Process of validating transactions and creating new blocks in a blockchain
+- **Traditional Mining**:
+  - Miners solve complex mathematical problems
+  - First to solve gets to create the next block
+  - Rewarded with new coins and transaction fees
+  - Secures the network through Proof of Work
+- **Mining Methods**:
+  - **Proof of Work (PoW)**: Bitcoin, Ethereum 1.0
+    - Requires computational power
+    - Energy-intensive
+    - Competitive mining
+  - **Proof of Stake (PoS)**: Ethereum 2.0, Cardano
+    - Based on coin ownership
+    - Less energy-intensive
+    - Validators instead of miners
+  - **Other Methods**:
+    - Proof of Space
+    - Proof of Authority
+    - Proof of History
 

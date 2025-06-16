@@ -257,12 +257,21 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     function _afterTokenTransfer(address from, address to, uint256 amount) internal virtual {}
 }
 
-// Your Only42 Contract
 contract Only42 is ERC20, Ownable, Pausable {
     
     // Maximum supply cap
     uint256 public constant MAX_SUPPLY = 42 * 10**18; // 42 tokens
-    
+
+    // Mining conf
+    uint256 public constant MAX_ACTIVE_PROBLEMS = 10;
+    uint256 public constant INITIAL_REWARD = 42 * 10**14;
+    uint256 public constant HALVE_INTERVAL = 5_000;
+
+    // Mining state
+    uint256 public totalMiningReward;
+    uint256 public currentReward;
+    uint256 public nbProblemsSolved;
+
     // Multisig configuration
     address[] public multisigOwners;
     uint256 public requiredApprovals;
@@ -276,16 +285,26 @@ contract Only42 is ERC20, Ownable, Pausable {
         bool executed;          // If already executed
         mapping(address => bool) hasApproved; // Who has approved
     }
+
+    struct Problem {
+        uint256 id;
+        uint256 firstNumber;
+        uint256 secondNumber;
+        bool isSolved;
+    }
     
     // Mappings
     mapping(uint256 => Proposal) public proposals;
     mapping(address => bool) public isMultisigOwner;
+    Problem[] public currentProblems;
 
     // Events for transparency
     event TokensMinted(address indexed to, uint256 amount);
     event TokensBurned(address indexed from, uint256 amount);
     event ContractPaused(address indexed by);
     event ContractUnpaused(address indexed by);
+    event NewProblemGenerated(uint256 indexed problemId, uint256 firstNumber, uint256 secondNumber);
+    event ProblemSolved(uint256 indexed problemId, address solver);
     
     // Multisig events
     event ProposalCreated(uint256 indexed proposalId, string action, address indexed proposer);
@@ -296,6 +315,10 @@ contract Only42 is ERC20, Ownable, Pausable {
         require(_multisigOwners.length > 0, "Need at least one multisig owner");
         require(_requiredApprovals > 0 && _requiredApprovals <= _multisigOwners.length, "Invalid required approvals");
         
+        currentReward = INITIAL_REWARD;
+        totalMiningReward = 0;
+        nbProblemsSolved = 0;
+
         // Set up multisig owners
         for (uint256 i = 0; i < _multisigOwners.length; i++) {
             require(_multisigOwners[i] != address(0), "Invalid owner address");
@@ -304,10 +327,15 @@ contract Only42 is ERC20, Ownable, Pausable {
             multisigOwners.push(_multisigOwners[i]);
             isMultisigOwner[_multisigOwners[i]] = true;
         }
+
+        // Generate initial problems
+        for (uint256 i = 0; i < MAX_ACTIVE_PROBLEMS; i++) {
+            _generateNewProblem();
+        }
         
         requiredApprovals = _requiredApprovals;
         
-        uint256 initialSupply = MAX_SUPPLY; // Mint the maximum supply at deployment
+        uint256 initialSupply = 0;
         _mint(_initialOwner, initialSupply);
         emit TokensMinted(_initialOwner, initialSupply);
     }
@@ -325,6 +353,76 @@ contract Only42 is ERC20, Ownable, Pausable {
         _;
     }
     
+    function _generateNewProblem() internal {
+        // Generate two random numbers between 1 and 1000
+        uint256 firstNumber = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, currentProblems.length))) % 1000;
+        uint256 secondNumber = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, firstNumber))) % 1000;
+        uint256 id = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, firstNumber, secondNumber)));
+        
+        // Create new problem
+        Problem memory newProblem = Problem({
+            id: id,
+            firstNumber: firstNumber,
+            secondNumber: secondNumber,
+            isSolved: false
+        });
+        
+        currentProblems.push(newProblem);
+        
+        emit NewProblemGenerated(currentProblems.length - 1, firstNumber, secondNumber);
+    }
+
+    function mine(uint256 problemId, uint256 answer) public whenNotPaused {
+        require(totalSupply() < MAX_SUPPLY, "Maximum supply reached");
+        
+        // Find the problem with matching ID
+        bool found = false;
+        uint256 problemIndex;
+        for(uint256 i = 0; i < currentProblems.length; i++) {
+            if(currentProblems[i].id == problemId) {
+                found = true;
+                problemIndex = i;
+                break;
+            }
+        }
+        require(found, "Problem not found");
+        require(!currentProblems[problemIndex].isSolved, "Problem already solved");
+        require(answer == currentProblems[problemIndex].firstNumber + currentProblems[problemIndex].secondNumber, "Wrong answer!");
+        
+        // Mark problem as solved
+        currentProblems[problemIndex].isSolved = true;
+        nbProblemsSolved++;
+        if (nbProblemsSolved % HALVE_INTERVAL == 0) {
+            currentReward /= 2;
+        }
+        // Mint reward
+        _mint(msg.sender, currentReward);
+        totalMiningReward += currentReward;
+        
+        emit TokensMinted(msg.sender, currentReward);
+        emit ProblemSolved(problemId, msg.sender);
+        
+        if (problemIndex != currentProblems.length - 1) {
+            currentProblems[problemIndex] = currentProblems[currentProblems.length - 1];
+        }
+        currentProblems.pop();
+        _generateNewProblem();
+    }
+
+    /**
+     * @dev Get all active problems
+     */
+    function getActiveProblems() public view returns (Problem[] memory) {
+        return currentProblems;
+    }
+
+    /**
+     * @dev Get number of active problems
+     */
+    function getProblemCount() public view returns (uint256) {
+        return currentProblems.length;
+    }
+
     /**
      * @dev Create a proposal to pause the contract
      */

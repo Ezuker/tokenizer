@@ -48,14 +48,18 @@ Block Explorer: https://bscscan.com
 4. **Deploy & Run Transactions** tab
 5. Environment: **"Injected Provider - MetaMask"**
 6. Select BSC Testnet in MetaMask
-7. Deploy with your address as `_initialOwner`
+7. Deploy with the following parameters:
+   - `_initialOwner`: Your wallet address
+   - `_multisigOwners`: Array of multisig owner addresses (at least one required)
+   - `_requiredApprovals`: Number of approvals needed (must be > 0 and <= number of multisig owners)
 8. **Save the contract address!**
 
 #### Step 4: Verify Deployment
 - Copy contract address from Remix
 - Visit: https://testnet.bscscan.com/address/YOUR_CONTRACT_ADDRESS
 - Verify contract shows up
-- Check your token balance
+- Check your token balance (Must be 0 at start)
+- Check if you can mine
 
 ### Phase 2: Contract Verification on BSCScan
 
@@ -78,15 +82,19 @@ Block Explorer: https://bscscan.com
    - Paste your complete contract code
    - Include all imports (flattened)
 5. **Constructor Arguments**: 
-   - Your initial owner address (ABI encoded)
-6. Submit and wait for verification
+   - `_initialOwner`: Your wallet address
+   - `_multisigOwners`: Array of multisig owner addresses (at least one required)
+   - `_requiredApprovals`: Number of approvals needed (must be > 0 and <= number of multisig owners)
 
-#### Get Constructor Arguments (ABI Encoded)
-Use Remix or online tools to encode your constructor parameter:
-```
-Function: constructor(address _initialOwner)
-Parameter: YOUR_WALLET_ADDRESS
-```
+   Example encoding:
+   ```
+   Function: constructor(address _initialOwner, address[] memory _multisigOwners, uint256 _requiredApprovals)
+   Parameters: 
+   - _initialOwner: YOUR_WALLET_ADDRESS
+   - _multisigOwners: [MULTISIG_OWNER_ADDRESS_1, MULTISIG_OWNER_ADDRESS_2, ...]
+   - _requiredApprovals: NUMBER_OF_REQUIRED_APPROVALS
+   ```
+6. Submit and wait for verification
 
 ### Phase 3: Publish Token Information
 

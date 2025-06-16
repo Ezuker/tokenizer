@@ -31,7 +31,10 @@ Example: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
 - "Deploy & Run Transactions" tab
 - Environment: "Remix VM (London)" or "JavaScript VM"
 - Contract: "Only42"
-- Constructor parameter `_INITIALOWNER`: **TEST_ACCOUNT_ADDRESS**
+- Constructor parameters:
+  - `_initialOwner`: **TEST_ACCOUNT_ADDRESS**
+  - `_multisigOwners`: Array of test addresses (at least one)
+  - `_requiredApprovals`: Number of approvals needed (must be > 0 and <= number of multisig owners)
 - Click "Deploy"
 - ✅ Instant deployment (no confirmation needed)
 

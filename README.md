@@ -69,16 +69,34 @@ This project implements an ERC-20 token called "Only42" (O42) as part of the 42 
 
 ### Core Functionality
 - **ERC-20 Compliance**: Full compatibility with ERC-20 standard
-- **Fixed Supply**: 42 tokens minted at deployment (no additional minting)
+- **Fixed Supply**: 42 tokens maximum (mined through problem solving)
 - **Burnable**: Token holders can permanently destroy their tokens
 - **Pausable**: Owner can halt all transfers in emergency situations
 - **Ownable**: Administrative functions restricted to contract owner
+- **Mining System**: 
+  - Solve math problems to earn tokens
+  - Initial reward: 0.0042 tokens
+  - Rewards halve every 5000 solved problems
+  - Maximum 10 active problems at once
 
 ### Security Features
 - **Access Control**: Only owner can pause/unpause the contract
 - **Balance Validation**: Burn function includes balance checks
 - **Event Logging**: All major operations emit events for transparency
 - **Overflow Protection**: Using Solidity 0.8.30 built-in overflow checks
+- **Multisig System**:
+  - Multiple owners for critical actions
+  - Configurable approval threshold
+  - Proposal-based governance
+
+### Constructor Parameters
+```solidity
+constructor(
+    address _initialOwner,      // Initial token owner
+    address[] memory _multisigOwners,  // Array of multisig owners
+    uint256 _requiredApprovals  // Required approvals for actions
+)
+```
 
 ### Custom Events
 ```solidity
