@@ -1,7 +1,7 @@
 # Only42 Token Project 🪙
 
 ## Overview
-This project implements an ERC-20 token called "Only42" (O42) as part of the 42 School Web3 curriculum. The token is developed using Solidity and deployed using Remix IDE with enhanced security features including pause/unpause controls, burn functionality, and owner-based access control.
+This project implements an ERC-20 token called "Only42" (OFT) as part of the 42 School Web3 curriculum. The token is developed using Solidity and deployed using Remix IDE with enhanced security features including pause/unpause controls, burn functionality, and owner-based access control.
 
 ## 🌐 Deployed Contracts
 
@@ -12,17 +12,17 @@ This project implements an ERC-20 token called "Only42" (O42) as part of the 42 
 ### Deployment Information
 
 #### BSC Testnet (LIVE) 🚀
-- **Contract Address**: `0x6b82271E52e06D89b19c769CeE7C274556E19Bf1`
+- **Contract Address**: `0x5F95E45d33ffaC5b9F11082CCaEE1287158296de`
 - **Network**: BSC Testnet (Chain ID: 97)
-- **Explorer**: [View on BSCScan](https://testnet.bscscan.com/address/0x6b82271E52e06D89b19c769CeE7C274556E19Bf1)
+- **Explorer**: [View on BSCScan](https://testnet.bscscan.com/address/0x5F95E45d33ffaC5b9F11082CCaEE1287158296de)
 - **Status**: ✅ Deployed & Active
 - **Deployment Date**: June 2025
 
 #### Token Details
 - **Name**: Only42
-- **Symbol**: O42
+- **Symbol**: OFT
 - **Decimals**: 18
-- **Total Supply**: 42 O42 (Fixed Supply)
+- **Total Supply**: 42 OFT (Fixed Supply)
 - **Features**: ERC-20 + Ownable + Pausable + Burnable
 - **Contract Type**: Fixed supply token with owner controls
 

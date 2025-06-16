@@ -311,7 +311,7 @@ contract Only42 is ERC20, Ownable, Pausable {
     event ProposalApproved(uint256 indexed proposalId, address indexed approver);
     event ProposalExecuted(uint256 indexed proposalId, string action);
     
-    constructor(address _initialOwner, address[] memory _multisigOwners, uint256 _requiredApprovals) ERC20("Only42", "O42") Ownable(_initialOwner) {
+    constructor(address _initialOwner, address[] memory _multisigOwners, uint256 _requiredApprovals) ERC20("Only42", "OFT") Ownable(_initialOwner) {
         require(_multisigOwners.length > 0, "Need at least one multisig owner");
         require(_requiredApprovals > 0 && _requiredApprovals <= _multisigOwners.length, "Invalid required approvals");
         
@@ -560,6 +560,6 @@ contract Only42 is ERC20, Ownable, Pausable {
      * @dev Get contract information for documentation
      */
     function getContractInfo() public pure returns (string memory, string memory, uint256, uint8) {
-        return ("Only42", "O42", 42 * 10**18, 18);
+        return ("Only42", "OFT", 42 * 10**18, 18);
     }
 }

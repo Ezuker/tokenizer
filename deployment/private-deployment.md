@@ -58,14 +58,14 @@ Example: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
 ```javascript
 // In Remix, call these functions:
 name()          // Should return "Only42"
-symbol()        // Should return "O42"
+symbol()        // Should return "OFT"
 totalSupply()   // Should return 42000000000000000000 (42 * 10^18)
 balanceOf(YOUR_ADDRESS) // Should return 42000000000000000000
 ```
 
 ### Test Transfer
 1. Copy another test account address from Remix
-2. Send some O42 to that address using transfer function
+2. Send some OFT to that address using transfer function
 3. Check balances updated in both accounts
 4. All transactions are instant in Remix VM
 
@@ -80,7 +80,7 @@ unpause()   // Resumes transfers
 
 - [ ] Contract deployed successfully in Remix VM
 - [ ] Contract address recorded
-- [ ] Initial balance verified (42 O42)
+- [ ] Initial balance verified (42 OFT)
 - [ ] Basic functions tested
 - [ ] Transfer functionality verified
 - [ ] Owner functions (pause/unpause) tested
