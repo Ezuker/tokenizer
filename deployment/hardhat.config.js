@@ -1,5 +1,8 @@
 require("dotenv").config();
 require("@nomicfoundation/hardhat-toolbox");
+const { vars } = require("hardhat/config");
+
+const BSCSCAN_API_KEY = vars.get("BSCSCAN_API_KEY");
 
 module.exports = {
   solidity: "0.8.30",
@@ -16,7 +19,7 @@ module.exports = {
   },
   etherscan: {
     apiKey: {
-      bscTestnet: process.env.BSCSCAN_API_KEY,
+      bscTestnet: BSCSCAN_API_KEY,
     },
   },
 };

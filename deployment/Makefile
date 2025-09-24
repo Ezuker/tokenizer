@@ -16,8 +16,7 @@ deploy: compile
 verify:
 	@echo "Verifying smart contracts..."
 	@read -p "Enter contract address: " CONTRACT_ADDR; \
-	read -p "Enter constructor arguments (space-separated): " CONSTRUCTOR_ARGS; \
-	npx hardhat verify --network bsctest $$CONTRACT_ADDR $$CONSTRUCTOR_ARGS
+	npx hardhat verify --network bsctest --constructor-args-path constructor-args.js $$CONTRACT_ADDR
 
 clean:
 	@echo "Cleaning up..."
